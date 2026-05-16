@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware imports
 const logger = require('./middleware/logger')
 
-// In-memory databse
+// In-memory database
 let blogPosts = [];
 let nextId = 1; // auto-increment counter
 

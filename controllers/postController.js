@@ -17,7 +17,7 @@ const getPostById = (req, res) => {
     const post = blogPosts.find((p) => p.id === id);
 
     if(!post){
-        res.status(404).json({
+        return res.status(404).json({
             status: 'error',
             message: `post with id ${id} not found`,
         });
@@ -38,7 +38,7 @@ const createPost = (req, res) => {
     if( !title || !content || !author ){
         return res.status(400).json({
             status: 'error',
-            message: 'title, content and author are required feilds',
+            message: 'title, content and author are required fields',
         });
     };
 
@@ -66,19 +66,19 @@ const updatePost = (req, res) => {
 
     const postIndex = blogPosts.findIndex((p) => p.id === id);
 
-    if(postIndex == -1){
+    if(postIndex === -1){
         return res.status(404).json({
             status: 'error',
             message: `Post with id ${id} not found`,
         });
     };
 
-    // merge existing array with new feilds from req.body
+    // merge existing array with new fields from req.body
     blogPosts[postIndex] = {
         ...blogPosts[postIndex], 
         ...req.body,
         id,
-        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
     };
 
     res.status(200).json({
@@ -103,7 +103,7 @@ const deletePost = (req, res) => {
     };
 
     // replace the array with filtered version
-    req.app.locals.blogPosts = blogPosts.filter( (p) => p.id != id );
+    req.app.locals.blogPosts = blogPosts.filter( (p) => p.id !== id );
 
     res.status(200).json({
         status: 'success',

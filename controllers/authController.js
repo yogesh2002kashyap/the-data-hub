@@ -8,11 +8,11 @@ const MOCK_USER = [
 const MOCK_JWT = 
     'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRtaW4ifQ.bW9ja1NpZ25hdHVyZUhlcmU';
 
-//POST /api/login - fetch credenttials and send mock JWT token 
+//POST /api/login - fetch credentials and send mock JWT token 
 const login = (req, res) => {
     const { username, password } = req.body;
 
-    //Validate feilds present
+    //Validate fields present
     if(!username || !password ){
         return res.status(400).json({
             status: 'error',
@@ -35,7 +35,7 @@ const login = (req, res) => {
     // Credentials matched — return mock token
     res.status(200).json({
         status: 'success',
-        message: 'Logged in successful',
+        message: 'Login successful',
         token: MOCK_JWT,
         user: { username: user.username },
     });
